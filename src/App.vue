@@ -1,85 +1,170 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div class="content">
+    <div class="Popular1">
+      <div class="Popular">Feature Category</div>
+      <div class="All">
+      <div class="Popular">All</div>
+      <div class="Popular">Milke & Dairies</div>
+      <div class="Popular">Coffees & Teas</div>
+      <div class="Popular">Meats</div>
+      <div class="Popular">Vegetable</div>
+      <div class="Popular">Fruite</div>
+      </div>
+      </div>
+    <div class="row1">
+      <Category
+        v-for="category in store.categories"
+        :key="category.id"
+        :image="category.image"
+        :bgColor="category.color"
+        :name="category.name"
+        :group="category.group"
+        :qty="category.item"
+      />
     </div>
-  </header>
-
-  <RouterView />
+    <div class="row2">
+      <Promotion
+        v-for="promotion in store.promotions"
+        :key="promotion.id"
+        :description="promotion.title"
+        :bgColor="promotion.color"
+        :image="promotion.image"
+      />
+    </div>
+    <div class="Popular1">
+      <div class="Popular">Popular products</div>
+      <div class="All">
+      <div class="Popular">All</div>
+      <div class="Popular">Milke & Dairies</div>
+      <div class="Popular">Coffees & Teas</div>
+      <div class="Popular">Meats</div>
+      <div class="Popular">Vegetable</div>
+      <div class="Popular">Fruite</div>
+      </div>
+      </div>
+    <div class="product1">
+      <Product v-for="product in store.products" 
+      :key="product.id"
+      :image="product.image" 
+      :bgcolor="product.color" 
+      :title="product.title" 
+      :number="product.number"
+      :title1="product.title1"
+      :image1="product.image1"
+      :total="product.total"
+      :total1="product.total1"
+      :order:="product.order"
+      :bgB="product.bg"/>
+    </div>
+    
+    <div class="product2">
+      <Product1 v-for="product1 in store.Products1" 
+      :key="product1.id"
+      :image="product1.image"
+      :bgcolor="product1.color" 
+      :title="product1.title" 
+      :number="product1.number"
+      :title1="product1.title1"
+      :image1="product1.image1"
+      :total="product1.total"
+      :total1="product1.total1"
+      :order:="product1.order"
+      :image2="product1.imagebutton"/>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script>
+import Button from "./components/Button.vue";
+import Category from "./components/Category.vue";
+import Product from './components/Product.vue';
+import Promotion from "./components/Promotion.vue";
+import Product1 from "./components/Product1.vue";
+
+import { useStore } from "./stores/store";
+export default {
+  name: "App",
+  components: {
+    Button,
+    Category,
+    Promotion,
+    Product,
+    Product1,
+  },
+  setup() {
+    const store = useStore();
+    return { store };
+  },
+};
+</script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap");
+body {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+ 
+  
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.All{
+  
+  width: 800px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 700px;
+  justify-content: space-between;
 }
+.Popular1{
+  display: flex;
+  flex-direction: row;
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  width: 1730px;
+  height: 40px;
+  margin-left: 35px;
+  background-color: rgb(255, 255, 255);
 }
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.Popular{
+  font-size: 180%;
+  color: #253D4E;
+  font-family: Quicksand ;
+ 
+  
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  
 }
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.row1 {
+  display: flex;
+  gap: 40px;
 }
-
-nav a:first-of-type {
-  border: 0;
+.row2 {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  justify-items: center;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.product1{
+  display: flex;
+  gap: 50px;
+  margin-top: 10px;
+  margin-left: 5px;
+  border: 1px;
+  
+}
+.product2{
+  display: flex;
+  gap: 50px;
+  margin-top: 10px;
+  margin-left: 5px;
+  border: 1px;
 }
 </style>

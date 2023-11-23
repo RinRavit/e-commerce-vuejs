@@ -8,10 +8,11 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  base: "/e-commerce-vuejs",
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  },
-  base: "/e-commerce-vuejs",
+  }
+  
 })
